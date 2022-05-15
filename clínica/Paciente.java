@@ -16,11 +16,14 @@ public class Paciente extends Persona {
     private String enfermedad;
 
     //Método constructor de la clase hija Paciente
-    public Paciente(String nombres, String apellidos, Date fechaNacimiento, char sexo, int telefono, String dui, String direccion, String ocupacion, String estadoCivil, int codigoPaciente) {
+    public Paciente(String nombres, String apellidos, Date fechaNacimiento, char sexo, int telefono, String dui, String direccion, String ocupacion, String estadoCivil, int codigoPaciente)
+    {
         super(nombres, apellidos, fechaNacimiento, sexo, telefono, dui, direccion, ocupacion, estadoCivil);
         this.codigoPaciente = codigoPaciente;
         this.enfermedad = enfermedad;
     }
+        
+    
 
     //Método para mostrar los datos del Paciente
     public void mostrarDatos() 

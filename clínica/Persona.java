@@ -15,16 +15,11 @@ import javax.swing.JOptionPane;
  *
  * @author Kevin Antonio Cortez Gutiérrez
  */
-public abstract class Persona {
-    private String nombres;
-    private String apellidos;
+public class Persona {
+    private String nombres, apellidos, dui, direccion, ocupacion, estadoCivil;
     private Date fechaNacimiento;
     private char sexo;
     private int telefono;
-    private String dui;
-    private String direccion;
-    private String ocupacion;
-    private String estadoCivil;
     
     //Método constructor con parametros
     public Persona(String _nombres, String _apellidos, Date _fechaNacimiento, char _sexo, int _telefono, String _dui, String _direccion, String _ocupacion, String _estadoCivil)
@@ -40,8 +35,11 @@ public abstract class Persona {
         this.estadoCivil = _estadoCivil;
     }
     
-    //Método abstracto
-    public abstract void funcion();
+    //Método que hara referencia a las variables polimorficas
+    public void funcion()
+    {
+        
+    }
     
     //Método para modificar el nombre
     public void setNombres(String _nombres)
@@ -86,14 +84,8 @@ public abstract class Persona {
      public String getSexo()
      {
          char sx = "f".charAt(0);
-         if (sx == this.sexo)
-         {
-             return "femenino";
-         }
-         else
-         {
-             return "masculino";
-         }
+         if (sx == this.sexo) return "femenino";
+         else return "masculino";
      }
      
      //Método para modificar el número de teléfono
@@ -165,21 +157,19 @@ public abstract class Persona {
      public String alimentarse(String respuesta)
      {
         respuesta = "si";
-        if(respuesta == respuesta)
-        {
-            return "Ha comido";
-        }
-        else
-        {
-            return "No ha comido";
-        }
+        if(respuesta == respuesta) return "Ha comido";
+        else return "No ha comido";
      }
      
-     //Arreglo de las edades de los pacientes15
+    private static boolean error;
+     //Arreglo de las edades de los pacientes
      public static void main(String[] arg)
     {
+        error = false;
         Scanner entrada = new Scanner(System.in);
-        int _arregloEdades;
+        try
+        {
+            int _arregloEdades;
         
         _arregloEdades = Integer.parseInt(JOptionPane.showInputDialog("Digite la cantidad de edades que ingresara:"));
         
@@ -191,10 +181,7 @@ public abstract class Persona {
             edades[i] = entrada.nextInt();
         }
         System.out.println("\nLas edades del arreglo son: ");
-        for (int i=0; i<_arregloEdades; i++)
-        {
-            System.out.println(edades[i]+" ");
-        }
+        for (int i=0; i<_arregloEdades; i++) System.out.println(edades[i]+" ");
         
         //Método de ordenación de Burbuja
         for (int i=0; i< _arregloEdades-1;i++)
@@ -211,10 +198,7 @@ public abstract class Persona {
         }
         //Mostrando el arreglo ordenado de forma creciente
         System.out.println("\nArreglo ordenado de forma creciente: ");
-        for (int i=0; i<_arregloEdades; i++)
-        {
-            System.out.println(edades[i]);
-        }
+        for (int i=0; i<_arregloEdades; i++)System.out.println(edades[i]);
         
         //Método de busqueda binaria
         System.out.println("Ingresa la edad que desea buscar: ");
@@ -231,23 +215,12 @@ public abstract class Persona {
                 valor = true;
                 break;
             }
-            else if (edadBuscada<edades[centro])
-            {
-                sup = centro - 1;
-            }
-            else 
-            {
-                inf = centro +1;
-            }
+            else if (edadBuscada<edades[centro]) sup = centro - 1;
+            else inf = centro +1;
         }
-        if (valor == true)
-        {
-            System.out.println("La edad ha sido encontrada en la posición "+ (centro+1));
-        }
-        else 
-        {
-            System.out.println("La edad no ha sido encontrada en ninguna posición dentro del arreglo.");
-        }
+        if (valor == true) System.out.println("La edad ha sido encontrada en la posición "+ (centro+1));
+        else System.out.println("La edad no ha sido encontrada en ninguna posición dentro del arreglo.");
+        
         
         //Método de busqueda secuencial
         int dato;
@@ -258,20 +231,38 @@ public abstract class Persona {
         int i=0;
         while (i<_arregloEdades && respuesta == false)
         {
-            if (edades[i] == dato)
-            {
-                respuesta = true;
-            }
+            if (edades[i] == dato)respuesta = true;
             i++;
         }
-        if (respuesta == false)
-        {
-            System.out.println("La edad no se encuentra dentro del arreglo.");
+        if (respuesta == false)System.out.println("La edad no se encuentra dentro del arreglo.");
+        else System.out.println("La edad se encuentra dentro del arreglo.");
         }
-        else
+        catch (Exception e)
         {
-            System.out.println("La edad se encuentra dentro del arreglo.");
+            error = true;
+            System.out.println("Ocurrio un error: "+e);
         }
+        finally
+        {
+            if(error==true) System.out.println("Hubo una excepción al ejecutar el código.");
+            else System.out.println("El código se ejecutó satisfactoriamente");
+        }
+        
+//        //Variable polimorfica es la que contiene un objeto
+//        Paciente objPaciente = new Paciente();
+//        Medico objMedico = new Medico();
+//        Enfermero objEnfermero = new Enfermero();
+//        
+//        //Creando variable polimorfica
+//        Persona objPersonas[] = new Persona[3];
+//        objPersonas[0] = objPaciente;
+//        objPersonas[1] = objMedico;
+//        objPersonas[2] = objEnfermero;
+//        
+//        //Poniendo a trabajar las variables polimorficas
+//        objPersonas[0].funcion();
+//        objPersonas[1].funcion();
+//        objPersonas[2].funcion();
     }
 }
     

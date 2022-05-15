@@ -21,7 +21,7 @@ public class Enfermero extends Persona {
         this.codigoEnfermero = codigoEnfermero;
         this.areaTrabajo = areaTrabajo;
     }
-    
+
     //Método para mostrar los datos del Enfermero
     public void mostrarDatos()
     {
